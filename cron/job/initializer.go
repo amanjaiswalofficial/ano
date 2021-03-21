@@ -6,6 +6,7 @@ import (
 	"github.com/go-co-op/gocron"
 )
 
+type Job func()
 type Scheduler struct{ obj *gocron.Scheduler }
 
 

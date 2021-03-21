@@ -11,12 +11,19 @@ func InitApp() int {
 }
 
 func main() {
+
+	var urls []string
+	urls = append(urls, "https://nerdist.com/feed/")
+	urls = append(urls, "https://edm.com/.rss/full/")
+
 	API := api.InitAPI()
-	
+
 	Scheduler := job.GetScheduler()
-	Scheduler.SubmitJob(job.PrintHelloWorld, 3)
+	//Scheduler.SubmitJob(job.PrintHelloWorld, 3)
+
+	job.SyncRSSFeeds(urls)
 
 	Scheduler.Start()
-	API.Start(8080)
+	API.Start(8081)
 
 }
