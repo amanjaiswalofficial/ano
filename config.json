@@ -1,0 +1,4 @@
+{
+    "CREDENTIALS_PATH": "../credentials.json",
+    "TOKEN_PATH": "../token.json"
+}

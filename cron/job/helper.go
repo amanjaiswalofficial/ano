@@ -35,3 +35,27 @@ func readExistingData(filePath string) (RSSData, bool){
 
 	return data, true
 }
+
+
+// SetupEnvironment is used to set env with variable name/value from config.json
+func SetupEnvironment(configPath string) (bool) {
+	jsonFile, err := os.Open(configPath)
+    // if we os.Open returns an error then handle it
+    if err != nil {
+        fmt.Println(err)
+		return false
+    }
+	
+    defer jsonFile.Close()
+
+    byteValue, _ := ioutil.ReadAll(jsonFile)
+
+    var result map[string]interface{}
+    json.Unmarshal([]byte(byteValue), &result)
+
+	for key, value := range result {
+		os.Setenv(key, value.(string))
+	}
+
+	return true
+}
