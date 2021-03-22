@@ -45,7 +45,7 @@ func SetupEnvironment(configPath string) (bool) {
         fmt.Println(err)
 		return false
     }
-	
+
     defer jsonFile.Close()
 
     byteValue, _ := ioutil.ReadAll(jsonFile)
