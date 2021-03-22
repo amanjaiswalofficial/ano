@@ -12,6 +12,8 @@ func InitApp() int {
 
 func main() {
 
+	job.SetupEnvironment("../config.json")
+
 	var urls []string
 	urls = append(urls, "https://nerdist.com/feed/")
 	urls = append(urls, "https://edm.com/.rss/full/")
