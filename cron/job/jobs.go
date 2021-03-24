@@ -16,10 +16,10 @@ func SyncRSSFeeds(urls []string) {
 
 	wg.Wait()
 
-	existingRSSData, exists := readExistingData("test.json")
+	existingRSSData, exists := readExistingData("data.json")
 	if exists {
 		data = filterData(data, existingRSSData)
 	}
-	writeDataToFile(data, "test.json")
+	writeDataToFile(data, "data.json")
 
 }
