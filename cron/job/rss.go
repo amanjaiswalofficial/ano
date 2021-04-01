@@ -43,6 +43,12 @@ func ParseXMLFromResponse(req []byte) *PostData {
 	if err != nil {
 		fmt.Println(err)
 	}
+
+	// FIX: Unmarshal description and store it inside the newsItem, getting rid of all HTML tags
+	for index, item := range data.Channel.Posts {
+		err = xml.Unmarshal([]byte(item.Description), &data.Channel.Posts[index].Description)
+	}
+
 	return data
 }
 

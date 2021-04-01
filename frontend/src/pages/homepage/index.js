@@ -12,14 +12,10 @@ const Homepage = () => {
 
     return (
         <div className={classes.homepage}>
-        <Container lg={12} fluid="true">
-                <Feed 
-                 classes={classes}
-                />    
-                <NavBar 
-                 classes={classes}
-                />
-        </Container>
+            <Container lg={12} fluid="true">
+                <Feed classes={classes}/>    
+                <NavBar classes={classes}/>
+            </Container>
         </div>
     )
 }

@@ -4,6 +4,7 @@ import (
 	"strconv"
 
 	"github.com/gin-gonic/gin"
+	"github.com/gin-contrib/cors"
 )
 
 // API is a custom type over *gin.Engine to add new methods on the existing type
@@ -13,6 +14,16 @@ type API struct{ Obj *gin.Engine }
 func InitAPI() API {
 
 	r := gin.Default()
+
+	r.Use(cors.New(cors.Config{
+        AllowOrigins:     []string{"http://localhost:3000"},
+        AllowHeaders:     []string{"Origin"},
+        ExposeHeaders:    []string{"Content-Length"},
+        AllowCredentials: true,
+        AllowOriginFunc: func(origin string) bool {
+            return origin == "http://localhost:3001"
+        },
+    }))
 
 	// Registering methods to APIs
 	r.GET("/feed", FeedData)
@@ -33,5 +44,5 @@ func FeedData(c *gin.Context) {
 	} else {
 		c.JSON(404, gin.H{"response": nil, "error": true})
 	}
-	
+
 }
