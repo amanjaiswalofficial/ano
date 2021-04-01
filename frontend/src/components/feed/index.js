@@ -1,39 +1,31 @@
-import React from 'react'
 import { Row } from 'react-grid-system';
+import NewsItems from "../newsItem"
+import React, { useEffect, useState } from 'react';
+import { getDataFromAPI } from "../../adapters/feed/adapters"
 
-import NewsItem from "../newsItem"
 
-const Feed = ({classes}) => {
-    const data = [
-        {
-            headline: "First Item",
-            logoURL: "https://pbs.twimg.com/profile_images/1129666669054324736/1W_E72cn_400x400.png",
-            detail: "First Item detail"
-        },
-        {
-            headline: "Second Item",
-            logoURL: "https://pbs.twimg.com/profile_images/1129666669054324736/1W_E72cn_400x400.png",
-            detail: "Second Item detail"
-        },
-        {
-            headline: "Third Item",
-            logoURL: "https://pbs.twimg.com/profile_images/1129666669054324736/1W_E72cn_400x400.png",
-            detail: "Third Item detail"
-        },
-        {
-            headline: "Fourth Item",
-            logoURL: "https://pbs.twimg.com/profile_images/1129666669054324736/1W_E72cn_400x400.png",
-            detail: "Fourth Item detail"
-        }
-    ]
-    return (
-        <Row 
+function Feed({classes}) {
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    async function fetchMyAPI() {
+        let response = await getDataFromAPI()
+        response = response["https://nerdist.com/feed/"]
+        response = response.slice(0, 10)
+        setData(response)
+      }
+  
+    fetchMyAPI()
+  }, [])
+
+  return(
+    <Row 
         lg={12} 
         justify="center" 
         className={classes.contentRow}>
-            <NewsItem data={data}/>
-        </Row>
-    )
+            <NewsItems data={data}/>
+    </Row>
+  )
 }
 
-export default Feed
+export default Feed;
