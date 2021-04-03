@@ -10,8 +10,6 @@ function Feed({classes}) {
   useEffect(() => {
     async function fetchMyAPI() {
         let response = await getDataFromAPI()
-        response = response["https://nerdist.com/feed/"]
-        response = response.slice(0, 10)
         setData(response)
       }
   
