@@ -8,7 +8,6 @@ const useStyles = createUseStyles({
     },
     contentRow: {
         minHeight: "555px",
-        border: "1px solid red",
         display: "flex"
     },
     navButton: {

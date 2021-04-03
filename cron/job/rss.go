@@ -31,6 +31,7 @@ type NewsItem struct {
 	Title       string
 	Description string
 	Link        string
+	Source		string
 }
 
 type NewsItems []NewsItem
@@ -104,13 +105,6 @@ func fetchUniqueItems(data RSSData, key string, unfilteredData []NewsItem, wg *s
 	defer wg.Done()
 }
 
-// func (item1 interface{}) union(item2 interface{}) ([]string){
-// 	fmt.Println(item1)
-// 	fmt.Println(item2)
-
-// 	return item1
-// }
-
 func getDataFromURL(url string, data *RSSData, wg *sync.WaitGroup) {
 	resp, err := http.Get(url)
 	if err != nil {
@@ -134,6 +128,7 @@ func getDataFromURL(url string, data *RSSData, wg *sync.WaitGroup) {
 			val.Title,
 			val.Description,
 			val.Link,
+			url,
 		}
 		newsItems = append(newsItems, newsItem)
 	}
