@@ -4,6 +4,8 @@ import (
 	"sync"
 )
 
+type Job func()
+
 // SyncRSSFeeds will take a slice of URLs to read RSS data from and store it.
 func SyncRSSFeeds(urls []string) {
 	data := make(RSSData)

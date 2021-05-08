@@ -4,7 +4,6 @@ import (
 	"encoding/xml"
 	"fmt"
 	"io/ioutil"
-	"log"
 	"net/http"
 	"reflect"
 	"sync"
@@ -73,7 +72,7 @@ func filterData(fetchedData RSSData, existingData RSSData) RSSData {
 			wg.Add(1)
 			go fetchUniqueItems(filteredRSSData, key, unfilteredItems, &wg)
 		} else {
-			log.Printf("Same datas in %v, no rewrite required\n", key)
+			// log.Printf("Same datas in %v, no rewrite required\n", key)
 			filteredRSSData = fetchedData
 		}
 	}

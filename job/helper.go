@@ -7,8 +7,19 @@ import (
 	"os"
 )
 
-func readDataFromFile() {
+func ReadDataFromFile() (RSSData) {
+	jsonFile, err := os.Open("data.json")
+	if err != nil {
+		fmt.Println(err)
+		return nil
+	}
+	defer jsonFile.Close()
 
+	byteValue, _ := ioutil.ReadAll(jsonFile)
+	var rssData RSSData
+	json.Unmarshal(byteValue, &rssData)
+
+	return rssData
 }
 
 func writeDataToFile(data RSSData, fileName string) {
@@ -18,7 +29,7 @@ func writeDataToFile(data RSSData, fileName string) {
 
 }
 
-func readExistingData(filePath string) (RSSData, bool){
+func readExistingData(filePath string) (RSSData, bool) {
 	jsonFile, err := os.Open(filePath)
 	byteValue, _ := ioutil.ReadAll(jsonFile)
 
