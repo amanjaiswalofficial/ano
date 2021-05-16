@@ -15,13 +15,16 @@ var readCommand = &cobra.Command{
 	Short: "Fetch news from several RSS feeds",
 	Long:  "Lists all the news from sources bases on flags",
 	Run: func(cmd *cobra.Command, args []string) {
+
+		sourceName, _ := cmd.Flags().GetString("source")
+		length, _ := cmd.Flags().GetString("length")
+
 		JSONData := job.ReadDataFromFile()
 
-		itemCount, err := strconv.Atoi(args[0])
+		itemCount, err := strconv.Atoi(length)
 		if err != nil {
 			itemCount = -1
 		}
-		sourceName := args[1]
 		PrintToCLI(JSONData, itemCount, sourceName)
 	},
 }
